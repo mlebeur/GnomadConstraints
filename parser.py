@@ -7,6 +7,7 @@ def load_GnomadConstraints(data_folder):
     infile = os.path.abspath("/opt/biothings/GRCh37/gnomAD_constraints/v2.1.1/GnomadConstraints.tsv")
     assert os.path.exists(infile)
     dat = pandas.read_csv(infile,sep="\t",squeeze=True,quoting=csv.QUOTE_NONE).to_dict(orient='records')
+    dat = dat.drop(columns=["brain_expression"]).to_dict(orient='records')
     results = {}
     for rec in dat:
         _id = rec["symbol"]
